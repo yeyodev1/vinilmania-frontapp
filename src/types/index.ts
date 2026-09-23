@@ -33,6 +33,8 @@ export interface Work {
   title: string
   // Ancho / alto de la foto: reserva el espacio antes de que cargue
   ratio: number
+  // Color dominante: pinta la tarjeta mientras la foto carga
+  color: string
 }
 
 export interface Client {
