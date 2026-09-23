@@ -2,7 +2,9 @@
   <section class="not-found">
     <p class="not-found__code">404</p>
     <h1 class="not-found__title">Esta página no existe</h1>
-    <p class="not-found__text">Puede que el enlace esté mal escrito o que la página se haya movido.</p>
+    <p class="not-found__text">
+      Puede que el enlace esté mal escrito o que la página se haya movido.
+    </p>
     <RouterLink to="/" class="btn btn--primary">Volver al inicio</RouterLink>
   </section>
 </template>
@@ -11,7 +13,7 @@
 .not-found {
   @include container(640px);
   @include flex(column, center, center, 0.8rem);
-  flex: 1;
+  min-height: 80svh;
   text-align: center;
   padding-block: $space-section;
 
@@ -25,7 +27,7 @@
   }
 
   &__text {
-    color: $ink-soft;
+    color: $bone-soft;
     margin-bottom: 0.6rem;
   }
 }
