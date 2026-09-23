@@ -1,34 +1,37 @@
 <script setup lang="ts">
 import TheHeader from '@/layout/TheHeader.vue'
+import TheMenu from '@/layout/TheMenu.vue'
 import TheFooter from '@/layout/TheFooter.vue'
-import ToastList from '@/components/ui/ToastList.vue'
+import WhatsAppFloat from '@/components/ui/WhatsAppFloat.vue'
 </script>
 
 <template>
-  <div class="app">
-    <TheHeader />
-    <main class="app__main">
-      <RouterView v-slot="{ Component }">
-        <Transition name="page" mode="out-in">
-          <component :is="Component" />
-        </Transition>
-      </RouterView>
-    </main>
-    <TheFooter />
-    <ToastList />
-  </div>
+  <a href="#main" class="skip-link">Saltar al contenido</a>
+  <TheHeader />
+  <TheMenu />
+  <main id="main" class="app__main">
+    <RouterView />
+  </main>
+  <TheFooter />
+  <WhatsAppFloat />
 </template>
 
 <style scoped lang="scss">
-.app {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 300;
+  padding: 0.7rem 1rem;
+  border-radius: $radius-sm;
+  background: $accent;
+  color: $coal;
+  font-weight: 700;
+  transform: translateY(-200%);
+  transition: transform 0.3s $ease;
 
-  &__main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+  &:focus {
+    transform: none;
   }
 }
 </style>
