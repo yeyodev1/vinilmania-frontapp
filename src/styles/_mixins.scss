@@ -1,5 +1,6 @@
 @use 'sass:map';
 @use 'colorVariables.module.scss' as *;
+@use 'typography' as *;
 
 // Breakpoints mobile-first. Uso: @include from('md') { ... }
 $breakpoints: (
@@ -80,5 +81,38 @@ $breakpoints: (
   &:focus-visible {
     outline: 2px solid $color;
     outline-offset: 3px;
+  }
+}
+
+// Franjas diagonales del catálogo (naranja/carbón). Úsalo en un ::before.
+@mixin diagonal-band($color: $accent, $angle: -8deg) {
+  content: '';
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  height: 22%;
+  background: $color;
+  transform: rotate($angle);
+  pointer-events: none;
+}
+
+// Trama de puntos del catálogo, sutil, sobre superficies oscuras
+@mixin halftone($color: rgba(#ffffff, 0.06), $size: 14px) {
+  background-image: radial-gradient($color 1.2px, transparent 1.4px);
+  background-size: $size $size;
+}
+
+// Sección estándar de la landing
+@mixin section {
+  position: relative;
+  padding-block: $space-section;
+}
+
+// Ocultar scrollbar manteniendo el scroll (carruseles horizontales)
+@mixin no-scrollbar {
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
   }
 }
