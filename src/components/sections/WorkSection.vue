@@ -29,6 +29,9 @@ const countOf = (id: string) =>
 
 const { columns } = useMasonry(visible)
 const { show } = useLightbox()
+// Fotos ya descargadas: aparecen con un fundido sobre su color dominante.
+const loaded = ref(new Set<string>())
+const markLoaded = (slug: string) => (loaded.value = new Set(loaded.value).add(slug))
 
 useReveal(root)
 
@@ -71,11 +74,18 @@ watch(visible, () => nextTick(() => ScrollTrigger.refresh()))
               v-for="{ work, index } in col"
               :key="work.slug"
               class="work__tile"
-              :style="{ aspectRatio: String(work.ratio) }"
+              :style="{ aspectRatio: String(work.ratio), backgroundColor: work.color }"
               :aria-label="`Ver en grande: ${work.title}`"
               @click="show(visible, index)"
             >
-              <img :src="workImage(work.slug)" :alt="work.title" loading="lazy" decoding="async" />
+              <img
+                :src="workImage(work.slug)"
+                :alt="work.title"
+                loading="lazy"
+                decoding="async"
+                :class="{ 'is-loaded': loaded.has(work.slug) }"
+                @load="markLoaded(work.slug)"
+              />
               <span class="work__caption">
                 <span>{{ work.title }}</span>
                 <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
@@ -208,7 +218,14 @@ watch(visible, () => nextTick(() => ScrollTrigger.refresh()))
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.9s $ease;
+      opacity: 0;
+      transition:
+        opacity 0.5s ease,
+        transform 0.9s $ease;
+
+      &.is-loaded {
+        opacity: 1;
+      }
     }
 
     &:hover img {
