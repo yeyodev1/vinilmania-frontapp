@@ -1,24 +1,10 @@
 import { createApp } from 'vue'
-import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
-import { useUserStore } from './stores/user'
+import { reducedMotion } from './composables/useMotion'
 import '@/styles/global.scss'
 
-const app = createApp(App)
-const pinia = createPinia()
+// Solo con movimiento permitido se ocultan los [data-reveal] antes de animarlos.
+if (!reducedMotion()) document.documentElement.classList.add('js-motion')
 
-app.use(pinia)
-app.use(router)
-
-const userStore = useUserStore(pinia)
-
-// httpBase emite este evento al recibir un 401: la sesión caducó.
-window.addEventListener('auth:token-expired', () => {
-  userStore.clear()
-  if (router.currentRoute.value.meta.requiresAuth) {
-    router.replace({ name: 'Login', query: { next: router.currentRoute.value.fullPath } })
-  }
-})
-
-app.mount('#app')
+createApp(App).use(router).mount('#app')
