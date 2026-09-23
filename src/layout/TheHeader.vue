@@ -1,115 +1,239 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
-import { site } from '@/config/site'
-import { useUserStore } from '@/stores/user'
-import { useBodyScroll } from '@/composables/useBodyScroll'
+import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { whatsappLink } from '@/config/site'
+import { useMenu } from '@/composables/useMenu'
 
-const route = useRoute()
-const userStore = useUserStore()
-const mobileOpen = ref(false)
+const { isOpen, toggle, close } = useMenu()
+const scrolled = ref(false)
+const hidden = ref(false)
+let lastY = 0
 
-useBodyScroll(mobileOpen)
+// Sólido al salir del hero; se esconde al bajar y reaparece al subir.
+function onScroll() {
+  const y = window.scrollY
+  scrolled.value = y > 40
+  hidden.value = y > 480 && y > lastY && !isOpen.value
+  lastY = y
+}
 
-// Al navegar se cierra el menú móvil.
-watch(() => route.fullPath, () => (mobileOpen.value = false))
+onMounted(() => {
+  onScroll()
+  window.addEventListener('scroll', onScroll, { passive: true })
+})
+onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
 </script>
 
 <template>
-  <header class="header">
+  <header
+    class="header"
+    :class="{
+      'header--solid': scrolled && !isOpen,
+      'header--hidden': hidden,
+      'header--menu': isOpen,
+    }"
+  >
     <div class="header__inner">
-      <RouterLink to="/" class="header__logo">{{ site.name }}</RouterLink>
+      <a href="#inicio" class="header__logo" aria-label="Vinil Manía, ir al inicio" @click="close">
+        <img src="/img/marcas/vinilmania-claro.webp" alt="Vinil Manía" width="190" height="28" />
+      </a>
 
-      <nav class="header__nav" :class="{ 'header__nav--open': mobileOpen }">
-        <RouterLink v-for="link in site.nav" :key="link.to" :to="link.to" class="header__link">
-          {{ link.label }}
-        </RouterLink>
-        <RouterLink v-if="userStore.isAuthenticated" to="/cuenta" class="header__link">
-          Mi cuenta
-        </RouterLink>
-        <RouterLink v-else to="/login" class="btn btn--primary header__cta">Ingresar</RouterLink>
-      </nav>
+      <div class="header__actions">
+        <a :href="whatsappLink()" class="header__quote" target="_blank" rel="noopener">
+          <i class="fa-brands fa-whatsapp"></i>
+          <span>Cotizar</span>
+        </a>
 
-      <button
-        class="header__burger"
-        :aria-label="mobileOpen ? 'Cerrar menú' : 'Abrir menú'"
-        :aria-expanded="mobileOpen"
-        @click="mobileOpen = !mobileOpen"
-      >
-        <i :class="mobileOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'"></i>
-      </button>
+        <button
+          id="menu-toggle"
+          class="header__toggle"
+          :aria-expanded="isOpen"
+          aria-controls="menu"
+          :aria-label="isOpen ? 'Cerrar menú' : 'Abrir menú'"
+          @click="toggle"
+        >
+          <span class="header__toggle-label">
+            <span :class="{ 'is-out': isOpen }">Menú</span>
+            <span :class="{ 'is-in': isOpen }">Cerrar</span>
+          </span>
+          <span class="header__burger" :class="{ 'header__burger--open': isOpen }">
+            <span></span>
+            <span></span>
+          </span>
+        </button>
+      </div>
     </div>
   </header>
 </template>
 
 <style scoped lang="scss">
 .header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: rgba($paper, 0.92);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid $line;
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 120;
+  height: var(--header-h);
+  transition:
+    transform 0.5s $ease,
+    background-color 0.4s ease,
+    border-color 0.4s ease;
+  border-bottom: 1px solid transparent;
+
+  &--solid {
+    background: rgba($coal, 0.82);
+    backdrop-filter: blur(14px) saturate(1.3);
+    border-color: $coal-line;
+  }
+
+  &--hidden {
+    transform: translateY(-100%);
+  }
 
   &__inner {
-    @include container;
+    @include container(1320px);
     @include flex(row, center, space-between, 1rem);
-    padding-block: 0.85rem;
+    height: 100%;
   }
 
-  &__logo {
-    @include display($text-xl, 600);
-    color: $ink;
-  }
-
-  &__nav {
-    display: none;
+  &__logo img {
+    width: auto;
+    height: 22px;
 
     @include from('md') {
-      @include flex(row, center, flex-end, 1.75rem);
+      height: 28px;
+    }
+  }
+
+  &__actions {
+    @include flex(row, center, flex-end, 0.6rem);
+  }
+
+  &__quote {
+    @include flex(row, center, center, 0.5rem);
+    height: 44px;
+    padding-inline: 0.9rem;
+    border-radius: $radius-pill;
+    border: 1px solid $coal-line;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition:
+      border-color 0.3s ease,
+      color 0.3s ease,
+      opacity 0.3s ease;
+
+    i {
+      font-size: 1.15rem;
+      color: $success;
     }
 
-    &--open {
-      @include until('md') {
-        @include flex(column, stretch, flex-start, 0.5rem);
-        position: fixed;
-        inset: 0;
-        top: 61px;
-        background: $paper;
-        padding: 1.5rem 1.25rem;
-        z-index: 90;
+    span {
+      display: none;
+
+      @include from('sm') {
+        display: inline;
       }
     }
-  }
 
-  &__link {
-    @include eyebrow;
-    color: $ink-soft;
-    padding: 0.6rem 0;
-    border-bottom: 1px solid transparent;
-    @include transition;
-
-    &:hover,
-    &.router-link-active {
-      color: $accent-deep;
-      border-color: $accent;
+    &:hover {
+      border-color: $success;
     }
   }
 
-  &__cta {
-    padding: 0.6rem 1.3rem;
-    font-size: $text-xs;
+  &--menu &__quote {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &__toggle {
+    @include flex(row, center, center, 0.75rem);
+    height: 44px;
+    padding: 0 0.5rem 0 1.1rem;
+    border-radius: $radius-pill;
+    background: $accent;
+    color: $coal;
+    transition:
+      background-color 0.3s ease,
+      transform 0.3s $ease;
+
+    &:hover {
+      background: $accent-hot;
+    }
+
+    &:active {
+      transform: scale(0.96);
+    }
+  }
+
+  &__toggle-label {
+    position: relative;
+    display: block;
+    min-width: 6.4em;
+    white-space: nowrap;
+    text-align: left;
+    height: 1.2em;
+    overflow: hidden;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    line-height: 1.2;
+
+    span {
+      display: block;
+      transition: transform 0.5s $ease;
+    }
+
+    span:last-child {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translateY(110%);
+    }
+
+    .is-out {
+      transform: translateY(-110%);
+    }
+
+    span.is-in {
+      transform: translateY(0);
+    }
   }
 
   &__burger {
-    font-size: 1.3rem;
-    color: $ink;
-    width: 2.4rem;
-    height: 2.4rem;
-    @include flex(row, center, center);
+    position: relative;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: $coal;
 
-    @include from('md') {
-      display: none;
+    span {
+      position: absolute;
+      left: 9px;
+      width: 14px;
+      height: 2px;
+      background: $bone;
+      border-radius: 2px;
+      transition:
+        transform 0.5s $ease,
+        top 0.5s $ease;
+    }
+
+    span:first-child {
+      top: 12px;
+    }
+
+    span:last-child {
+      top: 18px;
+    }
+
+    &--open span:first-child {
+      top: 15px;
+      transform: rotate(45deg);
+    }
+
+    &--open span:last-child {
+      top: 15px;
+      transform: rotate(-45deg);
     }
   }
 }
