@@ -1,31 +1,81 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-EC">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-    <title>Vinil Manía</title>
-    <meta name="description" content="Vinil Manía" />
-    <meta name="theme-color" content="#f2831a" />
+    <title>Vinil Manía | Polarizado, wrapping, branding vehicular y stickers en Guayaquil</title>
+    <meta
+      name="description"
+      content="Películas antisolares para autos, casas y oficinas, wrapping, branding vehicular, señalética, letreros corpóreos LED y stickers premium de alto relieve. Más de 10 años en Guayaquil, cobertura en todo Ecuador."
+    />
+    <link rel="canonical" href="https://vinilmania.ec/" />
+    <meta name="theme-color" content="#121313" />
+    <meta name="geo.region" content="EC-G" />
+    <meta name="geo.placename" content="Guayaquil" />
 
     <!-- Open Graph / social (WhatsApp es el canal principal de compartir) -->
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="es_EC" />
     <meta property="og:site_name" content="Vinil Manía" />
-    <meta property="og:title" content="Vinil Manía" />
-    <meta property="og:description" content="Vinil Manía" />
-    <meta property="og:url" content="https://vinilmania.ec" />
-    <meta property="og:image" content="https://vinilmania.ec/og.png" />
+    <meta property="og:title" content="Vinil Manía | Vinil que protege, viste y vende" />
+    <meta
+      property="og:description"
+      content="Polarizado, control solar, wrapping, branding vehicular, señalética y stickers premium en Guayaquil y todo Ecuador."
+    />
+    <meta property="og:url" content="https://vinilmania.ec/" />
+    <meta property="og:image" content="https://vinilmania.ec/og.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Datos estructurados: negocio local con sus tres unidades y servicios -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://vinilmania.ec/#negocio",
+        "name": "Vinil Manía",
+        "url": "https://vinilmania.ec/",
+        "image": "https://vinilmania.ec/og.jpg",
+        "logo": "https://vinilmania.ec/img/marcas/vinilmania.webp",
+        "description": "Películas antisolares, wrapping, branding vehicular, señalética, letreros corpóreos y stickers premium con impresión UV.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Guayaquil",
+          "addressRegion": "Guayas",
+          "addressCountry": "EC"
+        },
+        "areaServed": { "@type": "Country", "name": "Ecuador" },
+        "subOrganization": [
+          { "@type": "Organization", "name": "Polarizados Ecuador", "description": "Películas de control solar residenciales, corporativas y vehiculares" },
+          { "@type": "Organization", "name": "LuvArt", "description": "Impresión UV de alto relieve: stickers premium y cuadros" }
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Servicios",
+          "itemListElement": [
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Películas antisolares vehiculares" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Películas antisolares arquitectónicas" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Branding corporativo para vehículos y espacios" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Wrapping y personalización de autos y motos" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Stickers premium y cuadros en impresión UV" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Señaléticas y letreros corpóreos" } }
+          ]
+        }
+      }
+    </script>
 
     <!-- Fuentes: siempre con <link>, nunca @import dentro del SCSS inyectado -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Montserrat:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,700..900&family=Montserrat:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
+    <link rel="preload" as="image" href="/img/trabajos/vehicular-dulce-antojo-lg.webp" fetchpriority="high" />
 
     <!-- Font Awesome Free por CDN; iconos como <i class="fa-solid fa-…"> -->
     <link
@@ -35,6 +85,10 @@
   </head>
   <body>
     <div id="app"></div>
+    <noscript>
+      Vinil Manía: películas antisolares, wrapping, branding vehicular, señalética y stickers premium en
+      Guayaquil, Ecuador.
+    </noscript>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
