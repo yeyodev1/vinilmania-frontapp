@@ -1,44 +1,51 @@
-// Paleta de Vinil Manía. Semántica primero: los componentes hablan de tinta,
-// papel y acento, no de "rosa" o "gris 700".
+// Paleta de Vinil Manía, tomada del catálogo 2026: carbón, naranja de marca y
+// los amarillos/rojos de las llamas del isotipo VM. La web es oscura por
+// defecto, como el catálogo; las secciones claras ($paper) son el contrapunto.
 @use 'sass:color';
 
 // Acento de marca
 $accent: #f2831a;
-$accent-deep: color.adjust($accent, $lightness: -12%);
-$accent-soft: color.mix($accent, #ffffff, 14%);
+$accent-deep: #d96a06;
+$accent-hot: #ff9d42;
+$accent-soft: rgba($accent, 0.14);
+$flame-yellow: #f7b500;
+$flame-red: #e2401c;
 
-// Superficies
-$paper: #fdfcfa; // fondo base
-$surface: #ffffff; // superficies elevadas
-$sand: #f1ece6; // bloques suaves
-$line: #e7e1d9; // bordes
+// Superficies oscuras
+$coal: #121313; // fondo base
+$coal-2: #1b1c1c; // bloques
+$coal-3: #262727; // tarjetas
+$coal-line: rgba(#ffffff, 0.09); // bordes sobre oscuro
 
-// Texto
-$ink: #191423; // texto principal
-$ink-soft: #4a4552; // texto secundario
-$ink-muted: #8a8590; // terciario / labels
+// Texto sobre oscuro
+$bone: #f5f2ee;
+$bone-soft: rgba($bone, 0.72);
+$bone-muted: rgba($bone, 0.48);
 
-$overlay: rgba(#100c14, 0.55);
+// Secciones claras
+$paper: #f3efe9;
+$surface: #ffffff;
+$line: #e2dcd3;
+$ink: #151616;
+$ink-soft: #4a4a4a;
+$ink-muted: #85817b;
+
+$overlay: rgba(#0b0b0b, 0.62);
 
 // Estados
-$success: #3bb77e;
-$warning: #d9a441;
-$info: #6a8caf;
+$success: #25d366; // verde WhatsApp
 $danger: #c2554f;
-$success-bg: rgba($success, 0.12);
-$warning-bg: rgba($warning, 0.12);
-$info-bg: rgba($info, 0.12);
-$danger-bg: rgba($danger, 0.12);
 
 // Compatibilidad con el scaffold base
 $primary: $accent;
-$primary-dark: $ink;
-$primary-light: $paper;
 $white: $surface;
-$text-light: $surface;
-$text-secondary: $ink-soft;
 
-// Sombras — suaves, nada de "card de dashboard"
-$shadow-sm: 0 1px 2px rgba($ink, 0.04), 0 4px 12px rgba($ink, 0.04);
-$shadow-md: 0 2px 6px rgba($ink, 0.05), 0 18px 40px rgba($ink, 0.08);
-$shadow-lg: 0 30px 70px rgba($ink, 0.14);
+// Sombras
+$shadow-sm:
+  0 1px 2px rgba(#000, 0.2),
+  0 4px 12px rgba(#000, 0.18);
+$shadow-md:
+  0 2px 6px rgba(#000, 0.2),
+  0 18px 40px rgba(#000, 0.3);
+$shadow-lg: 0 30px 80px rgba(#000, 0.45);
+$glow: 0 10px 40px rgba($accent, 0.35);
