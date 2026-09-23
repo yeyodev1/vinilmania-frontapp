@@ -1,103 +1,165 @@
 <script setup lang="ts">
-import { site, whatsappLink } from '@/config/site'
+import { nav, site, units, whatsappLink } from '@/config/site'
 
 const year = new Date().getFullYear()
+const socials = [
+  { icon: 'fa-brands fa-instagram', url: site.social.instagram, label: 'Instagram' },
+  { icon: 'fa-brands fa-facebook-f', url: site.social.facebook, label: 'Facebook' },
+  { icon: 'fa-brands fa-tiktok', url: site.social.tiktok, label: 'TikTok' },
+].filter((s) => s.url)
 </script>
 
 <template>
   <footer class="footer">
     <div class="footer__inner">
-      <div class="footer__brand">
-        <span class="footer__name">{{ site.name }}</span>
-        <p class="footer__tagline">{{ site.tagline }}</p>
-      </div>
-
-      <div class="footer__col">
-        <h4 class="footer__heading">Navegación</h4>
-        <RouterLink v-for="link in site.nav" :key="link.to" :to="link.to">
-          {{ link.label }}
-        </RouterLink>
-      </div>
-
-      <div class="footer__col">
-        <h4 class="footer__heading">Contacto</h4>
-        <a :href="`mailto:${site.email}`">
-          <i class="fa-solid fa-envelope"></i> {{ site.email }}
-        </a>
-        <a v-if="site.whatsapp" :href="whatsappLink()" target="_blank" rel="noopener">
-          <i class="fa-brands fa-whatsapp"></i> WhatsApp
+      <div class="footer__top">
+        <p class="footer__claim">¿Listo para que tu marca se vea?</p>
+        <a :href="whatsappLink()" class="btn btn--primary" target="_blank" rel="noopener">
+          <i class="fa-brands fa-whatsapp"></i> Cotizar ahora
         </a>
       </div>
-    </div>
 
-    <div class="footer__bar">
-      <span>© {{ year }} {{ site.name }}</span>
-      <span class="footer__credit">Hecho por <a href="https://bakano.ec" target="_blank" rel="noopener">Bakano</a></span>
+      <div class="footer__mid">
+        <div class="footer__brand">
+          <img
+            src="/img/marcas/vinilmania-claro.webp"
+            alt="Vinil Manía"
+            width="200"
+            height="30"
+            loading="lazy"
+          />
+          <p>{{ site.description }}</p>
+          <ul v-if="socials.length" class="footer__social">
+            <li v-for="s in socials" :key="s.label">
+              <a :href="s.url" target="_blank" rel="noopener" :aria-label="s.label"
+                ><i :class="s.icon"></i
+              ></a>
+            </li>
+          </ul>
+        </div>
+
+        <nav class="footer__nav" aria-label="Pie de página">
+          <a v-for="item in nav" :key="item.id" :href="`#${item.id}`">{{ item.label }}</a>
+        </nav>
+
+        <ul class="footer__units">
+          <li v-for="unit in units" :key="unit.id">
+            <img :src="unit.logo" :alt="unit.name" loading="lazy" />
+          </li>
+        </ul>
+      </div>
+
+      <p class="footer__legal">
+        © {{ year }} {{ site.legalName }} · {{ site.city }}, {{ site.country }}
+      </p>
     </div>
   </footer>
 </template>
 
 <style scoped lang="scss">
 .footer {
-  background: $ink;
-  color: rgba($paper, 0.85);
-  margin-top: auto;
+  background: #0c0d0d;
+  border-top: 3px solid $accent;
 
   &__inner {
-    @include container;
-    @include flex-cards(220px, 2.5rem);
+    @include container(1320px);
+    @include flex(column, stretch, flex-start, 2.5rem);
     padding-block: $space-xl 2rem;
   }
 
+  &__top {
+    @include flex(column, flex-start, flex-start, 1.2rem);
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid $coal-line;
+
+    @include from('md') {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  &__claim {
+    @include display($display-md, 900);
+    max-width: 16ch;
+  }
+
+  &__mid {
+    @include flex(column, flex-start, flex-start, 2rem);
+
+    @include from('lg') {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+
   &__brand {
-    flex: 2 1 260px;
+    @include flex(column, flex-start, flex-start, 1rem);
+    max-width: 420px;
+
+    img {
+      height: 28px;
+      width: auto;
+    }
+
+    p {
+      font-size: $text-sm;
+      color: $bone-muted;
+    }
   }
 
-  &__name {
-    @include display($text-xl, 600);
-    color: $paper;
-    display: block;
-    margin-bottom: 0.6rem;
-  }
-
-  &__tagline {
-    font-size: $text-sm;
-    color: rgba($paper, 0.65);
-    max-width: 34ch;
-  }
-
-  &__col {
-    @include flex(column, flex-start, flex-start, 0.55rem);
-    font-size: $text-sm;
+  &__social {
+    list-style: none;
+    @include flex(row, center, flex-start, 0.5rem);
 
     a {
-      color: rgba($paper, 0.75);
-      @include transition(color);
+      @include flex(row, center, center);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid $coal-line;
+      transition: all 0.3s ease;
 
       &:hover {
-        color: $accent-soft;
+        background: $accent;
+        color: $coal;
       }
     }
   }
 
-  &__heading {
-    @include eyebrow;
-    color: $accent-soft;
-    margin-bottom: 0.4rem;
+  &__nav {
+    @include flex(column, flex-start, flex-start, 0.6rem);
+
+    a {
+      font-size: $text-sm;
+      color: $bone-soft;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: $accent;
+      }
+    }
   }
 
-  &__bar {
-    @include container;
-    @include flex(row, center, space-between, 1rem);
+  &__units {
+    list-style: none;
+    @include flex(row, center, flex-start, 1.5rem);
     flex-wrap: wrap;
-    padding-block: 1.2rem;
-    border-top: 1px solid rgba($paper, 0.1);
-    font-size: $text-xs;
-    color: rgba($paper, 0.55);
+
+    img {
+      height: 34px;
+      width: auto;
+      opacity: 0.85;
+    }
+
+    li:nth-child(2) img {
+      height: 64px;
+    }
   }
 
-  &__credit a {
-    color: rgba($paper, 0.8);
+  &__legal {
+    font-size: $text-xs;
+    color: $bone-muted;
   }
 }
 </style>
