@@ -4,14 +4,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Qué es esto
 
-Frontend de Vinil Manía. Vue 3 + Vite + TypeScript, SCSS propio, Pinia, vue-router.
-Desplegado en Vercel. El backend vive en el repo hermano `*-backapp` (Express 5 + Mongoose).
+Landing de una sola página de Vinil Manía (vinilmania.ec). Vue 3 + Vite + TypeScript, SCSS
+propio, vue-router y GSAP. Desplegada en Vercel. **No tiene backend**: el contacto es por
+WhatsApp y todo el contenido vive en `src/config/`.
 
 ## Comandos
 
 ```sh
 pnpm install
-pnpm dev          # :5173 — necesita el backapp en :8100
+pnpm dev          # :5173
 pnpm build        # vue-tsc -b && vite build (el type-check corre acá)
 pnpm typecheck
 pnpm format
@@ -44,16 +45,17 @@ En componentes: `$ink`, `$accent`, `@include from('md')`, `@include container` �
 
 ## Arquitectura
 
-- **Routes** (`src/router/index.ts`) — lazy imports, `meta.title`, `meta.requiresAuth`; el
-  título se aplica en `afterEach`.
-- **Services** (`src/services/`) — `class XService extends APIBase`, `export const xService`.
-  `httpBase.ts` resuelve la URL del API (env → localhost → túnel `-front`/`-back` → prod),
-  pone el Bearer de `localStorage.access_token` y emite `auth:token-expired` en 401.
-- **Stores** (`src/stores/`) — Pinia options API. `user.ts` guarda la sesión y `restore()`
-  la verifica contra `/auth/me` al arrancar.
-- **Composables** — estado de módulo (`ref` fuera de la función) para estado UI compartido.
-- **Errores del API** — siempre `{ status, message, data? }` (`ApiError`); el `message` viene
-  en español desde el backend y se puede mostrar tal cual en un toast.
+- **Contenido** — `src/config/site.ts` (copy, líneas, servicios, clientes, FAQ, WhatsApp) y
+  `src/config/gallery.ts` (fotos del portafolio con su proporción).
+- **Fotos** — `public/img/trabajos/<slug>-sm.webp` (640px) y `-lg.webp` (1600px). Para sumar
+  una foto: generar las dos versiones y agregar la entrada en `gallery.ts` con su `ratio`.
+- **Secciones** — `src/components/sections/`, una por bloque de la home, en el orden de `HomeView`.
+- **Menú a pantalla completa** — `TheMenu.vue` + `useMenuAnimation.ts` (timeline GSAP) +
+  `useMenu.ts` (estado compartido con el botón del header).
+- **Animación** — `useMotion.ts`: `useReveal(root)` anima los `[data-reveal]` al entrar en
+  pantalla; `data-reveal="stagger"` anima a los hijos en cascada. Respeta reduced motion.
+- **Pendientes del cliente** — `site.whatsapp` vacío deja los botones apuntando a `#contacto`
+  y el formulario deshabilitado; `testimonials` vacío oculta esa sección.
 
 ## Convenciones
 
