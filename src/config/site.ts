@@ -8,8 +8,8 @@ import type { Unit, Service, NavItem, Client, Step, Faq, Testimonial, Machine } 
 const img = (slug: string, size: 'sm' | 'lg' = 'lg') => `/img/trabajos/${slug}-${size}.webp`
 
 export const site = {
-  name: 'Vinil Manía',
-  legalName: 'Vinil Manía',
+  name: 'Vinilmanía',
+  legalName: 'Vinilmanía',
   description:
     'Películas antisolares para autos, casas y oficinas, wrapping, branding vehicular, señalética, letreros corpóreos y stickers premium en Guayaquil, con cobertura en todo Ecuador.',
   url: 'https://vinilmania.ec',
@@ -29,7 +29,7 @@ export const nav: NavItem[] = [
   {
     id: 'inicio',
     label: 'Inicio',
-    hint: 'Vinil Manía',
+    hint: 'Vinilmanía',
     image: img('vehicular-dulce-antojo', 'sm'),
   },
   {
@@ -54,12 +54,12 @@ export const nav: NavItem[] = [
     id: 'clientes',
     label: 'Clientes',
     hint: 'Marcas que confían',
-    image: img('letreros-upper-led', 'sm'),
+    image: img('letreros-dieselectro', 'sm'),
   },
   {
     id: 'proceso',
     label: 'Cómo trabajamos',
-    hint: 'De la idea a la instalación',
+    hint: 'Damos vida a tus ideas',
     image: img('vehicular-instalador', 'sm'),
   },
   {
@@ -113,11 +113,11 @@ export const about = {
 export const units: Unit[] = [
   {
     id: 'vinilmania',
-    name: 'Vinil Manía',
+    name: 'Vinilmanía',
     tag: 'Vinil, branding y personalización',
     logo: '/img/marcas/vinilmania-claro.webp',
     image: img('vehicular-cargolan'),
-    text: 'Desarrollamos y materializamos ideas creativas con viniles adhesivos sobre todo tipo de superficies: trabajos corporativos, vehiculares y decorativos en paredes, PVC, vidrio y más, cuidando la calidad visual, la correcta instalación y la durabilidad.',
+    text: 'Desarrollamos y materializamos ideas creativas con viniles adhesivos: trabajos corporativos, vehiculares y decorativos en paredes, PVC, vidrio y más, cuidando la calidad visual, la correcta instalación y la durabilidad.',
     points: [
       'Branding vehicular y de flotas',
       'Wrapping y personalización de autos y motos',
@@ -131,7 +131,7 @@ export const units: Unit[] = [
   {
     id: 'polarizados',
     name: 'Polarizados Ecuador',
-    tag: 'Películas de control solar · by Vinil Manía',
+    tag: 'Películas de control solar · by Vinilmanía',
     logo: '/img/marcas/polarizados-claro.webp',
     image: img('solar-casa-jardin'),
     text: 'Soluciones en películas de control solar para uso residencial, corporativo y vehicular. Nuestras láminas reducen la radiación UV, controlan el ingreso de calor y mejoran el confort térmico: protección, eficiencia y bienestar en cada espacio.',
@@ -147,9 +147,9 @@ export const units: Unit[] = [
   {
     id: 'luvart',
     name: 'LuvArt',
-    tag: 'Impresión UV de alto relieve · by Vinil Manía',
+    tag: 'Impresión UV de alto relieve · by Vinilmanía',
     logo: '/img/marcas/luvart-claro.webp',
-    image: img('stickers-codicia'),
+    image: img('stickers-costenita'),
     text: 'Desarrollamos ideas artísticas y corporativas con impresión UV de alta calidad y tecnología 100% japonesa. Alto relieve, fidelidad de color, texturas y larga durabilidad sobre una amplia variedad de sustratos.',
     points: [
       'Stickers temáticos premium para marcas',
@@ -181,7 +181,7 @@ export const services: Service[] = [
   {
     id: 'branding',
     title: 'Branding corporativo para vehículos y espacios',
-    unit: 'Vinil Manía',
+    unit: 'Vinilmanía',
     text: 'Convertimos tu flota en publicidad móvil y tus paredes y vitrinas en espacios que refuerzan tu marca.',
     items: [
       'Brandeo vehicular',
@@ -195,7 +195,7 @@ export const services: Service[] = [
   {
     id: 'wrapping',
     title: 'Wrapping y personalización de autos y motos',
-    unit: 'Vinil Manía',
+    unit: 'Vinilmanía',
     text: 'Cambio de color, calcas y personalización con vinil para que tu vehículo se vea único.',
     items: ['Cambio de color', 'Calcas para motos', 'Personalización a medida'],
     image: img('vehicular-instalador', 'sm'),
@@ -206,12 +206,12 @@ export const services: Service[] = [
     unit: 'LuvArt',
     text: 'Impresión UV con alto relieve, barniz y texturas. Stickers temáticos que las marcas quieren coleccionar.',
     items: ['Stickers premium', 'Alto relieve', 'Cuadros con textura'],
-    image: img('stickers-codicia', 'sm'),
+    image: img('stickers-costenita', 'sm'),
   },
   {
     id: 'senaletica',
     title: 'Señaléticas y letreros corpóreos',
-    unit: 'Vinil Manía',
+    unit: 'Vinilmanía',
     text: 'Sistemas de orientación y letreros que destacan tu marca de día y de noche.',
     items: [
       'Señalética corporativa',
@@ -219,12 +219,12 @@ export const services: Service[] = [
       'Letreros con estructura',
       'Gigantografías',
     ],
-    image: img('letreros-upper-led', 'sm'),
+    image: img('letreros-dieselectro', 'sm'),
   },
   {
     id: 'pop',
     title: 'Material POP y textiles',
-    unit: 'Vinil Manía',
+    unit: 'Vinilmanía',
     text: 'Todo para ferias, activaciones y eventos, y prendas que llevan tu marca puesta.',
     items: ['Roll ups y backings', 'Counters y stands', 'Camisetas, buzos y gorras'],
     image: img('pop-backing-dunkin', 'sm'),
@@ -233,20 +233,29 @@ export const services: Service[] = [
 
 export const clients: Client[] = [
   { name: 'Upper', logo: 'upper' },
+  { name: 'La Costeñita', logo: 'la-costenita' },
   { name: "Dunkin'", logo: 'dunkin' },
+  { name: 'Furia St', logo: 'furia-st' },
   { name: 'Lamicer', logo: 'lamicer' },
+  { name: 'Naturíssimo', logo: 'naturissimo' },
   { name: 'Rubasa', logo: 'rubasa' },
+  { name: 'Crookie Bomb', logo: 'crookie-bomb' },
   { name: 'Flora Food Group', logo: 'flora' },
-  { name: '400°', logo: '400-grados' },
+  { name: 'Golden Prague', logo: 'golden-prague' },
   { name: 'Fasinarm', logo: 'fasinarm' },
-  { name: 'Starcargo', logo: 'starcargo' },
+  { name: 'Bendito', logo: 'bendito' },
   { name: 'Inproel', logo: 'inproel' },
+  { name: 'Rukito', logo: 'rukito' },
   { name: 'Cargolan', logo: 'cargolan' },
+  { name: 'Edyka', logo: 'edyka' },
   { name: 'Aseplas', logo: 'aseplas' },
+  { name: 'The Smart Roll', logo: 'the-smart-roll' },
   { name: 'Car Secure', logo: 'car-secure' },
+  { name: 'Pikeos', logo: 'pikeos' },
   { name: 'Cartones & Papeles', logo: 'cartones-papeles' },
+  { name: 'Empapate', logo: 'empapate' },
   { name: '1700 Custodia', logo: '1700-custodia' },
-  { name: 'Cliente corporativo', logo: 'escudo-z' },
+  { name: 'Fiby Dog', logo: 'fiby-dog' },
   { name: 'Multijairos', logo: 'multijairos' },
 ]
 
@@ -348,7 +357,7 @@ export const contact = {
   ],
 }
 
-export function whatsappLink(message = 'Hola Vinil Manía, quiero más información'): string {
+export function whatsappLink(message = 'Hola Vinilmanía, quiero más información'): string {
   // Sin número todavía: los botones llevan al formulario de contacto.
   if (!site.whatsapp) return '#contacto'
   return `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(message)}`

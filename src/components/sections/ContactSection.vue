@@ -11,7 +11,7 @@ const form = reactive({ name: '', topic: contact.topics[0] as string, city: '', 
 // Sin backend: el formulario solo arma el texto y lo abre en WhatsApp.
 const message = computed(() => {
   const lines = [
-    `Hola Vinil Manía, soy ${form.name.trim() || '(tu nombre)'}.`,
+    `Hola Vinilmanía, soy ${form.name.trim() || '(tu nombre)'}.`,
     `Me interesa: ${form.topic}.`,
   ]
   if (form.city.trim()) lines.push(`Ciudad: ${form.city.trim()}.`)

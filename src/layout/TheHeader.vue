@@ -33,8 +33,8 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
     }"
   >
     <div class="header__inner">
-      <a href="#inicio" class="header__logo" aria-label="Vinil Manía, ir al inicio" @click="close">
-        <img src="/img/marcas/vinilmania-claro.webp" alt="Vinil Manía" width="190" height="28" />
+      <a href="#inicio" class="header__logo" aria-label="Vinilmanía, ir al inicio" @click="close">
+        <img src="/img/marcas/vinilmania-claro.webp" alt="Vinilmanía" width="190" height="28" />
       </a>
 
       <div class="header__actions">

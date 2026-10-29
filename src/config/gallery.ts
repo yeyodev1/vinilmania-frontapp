@@ -216,11 +216,18 @@ export const works: Work[] = [
     color: '#d3ccc8',
   },
   {
-    slug: 'stickers-codicia',
+    slug: 'stickers-costenita',
     category: 'stickers',
-    title: 'Stickers premium · Codicia',
-    ratio: 0.753,
-    color: '#937f7d',
+    title: 'Stickers coleccionables · La Costeñita',
+    ratio: 0.75,
+    color: '#9fa18e',
+  },
+  {
+    slug: 'stickers-costenita-coleccion',
+    category: 'stickers',
+    title: 'Colección de stickers · La Costeñita',
+    ratio: 0.75,
+    color: '#9c9f90',
   },
   {
     slug: 'stickers-indomable',
@@ -321,11 +328,11 @@ export const works: Work[] = [
     color: '#607077',
   },
   {
-    slug: 'letreros-upper-led',
+    slug: 'letreros-dieselectro',
     category: 'letreros',
-    title: 'Letrero corpóreo LED · Upper',
-    ratio: 2.115,
-    color: '#393c33',
+    title: 'Letreros corpóreos · Dieselectro',
+    ratio: 1.6,
+    color: '#6b7c8d',
   },
   {
     slug: 'letreros-gigantografia-iplas',

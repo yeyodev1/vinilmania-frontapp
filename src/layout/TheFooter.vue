@@ -23,7 +23,7 @@ const socials = [
         <div class="footer__brand">
           <img
             src="/img/marcas/vinilmania-claro.webp"
-            alt="Vinil Manía"
+            alt="Vinilmanía"
             width="200"
             height="30"
             loading="lazy"

@@ -12,7 +12,7 @@ useReveal(root)
     <div class="process__inner">
       <header class="process__head" data-reveal>
         <p class="process__eyebrow">Cómo trabajamos</p>
-        <h2 class="process__title">De tu idea a la instalación</h2>
+        <h2 class="process__title">Damos vida a tus ideas</h2>
       </header>
 
       <ol class="process__steps" data-reveal="stagger">
